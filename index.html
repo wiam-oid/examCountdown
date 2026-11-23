@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spooky</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="test.css">
+
+</head>
+<body>
+  <!-- SECTION 1: what you see first -->
+  <section class="hero">
+      <header class="timezones">
+        <span class="tz-label">Time Zones :</span>
+        <div class="tz-scroll">
+            <div class="ticker">
+              <span>Morocco : <b id="ma-time">00:00</b></span>
+              <span>London : <b id="london-time">00:00</b></span>
+              <span>Moscow : <b id="moscow-time">00:00</b></span>
+              <span>Cairo : <b id="cairo-time">00:00</b></span>
+            </div>
+        </div>
+      </header>
+      <div class="hero-content">
+        <h1 id="message-area">
+            <span id="message"></span><span class="cursor">|</span>
+         </h1>
+
+        <div class="timer">
+          <div class="unit"><span id="days">0</span><small>days</small></div>
+          <b class="sep">:</b>
+          <div class="unit"><span id="hours">0</span><small>hours</small></div>
+          <b class="sep">:</b>
+          <div class="unit"><span id="minutes">0</span><small>minutes</small></div>
+          <b class="sep">:</b>
+          <div class="unit"><span id="seconds">0</span><small>seconds</small></div>
+        </div>
+      </div>
+  </section>
+
+  <!-- SECTION 2: you scroll down to find this -->
+  <section class="planner">
+    <h2>Counter</h2>
+
+    <div class="stats">
+      <div class="stat">
+          <div class="module-controls">
+            <button id="dec-modules" aria-label="Decrease modules">−</button>
+            <span id="modules">12</span>
+            <button id="inc-modules" aria-label="Increase modules">+</button>
+          </div>
+          <small>modules</small>
+      </div>
+      <div class="stat">
+        <span id="hours-left">0</span>
+        <small>hours remaining</small>
+      </div>
+      <div class="stat">
+        <span id="hours-per-module">0</span>
+        <small>hours per module</small>
+      </div>
+      <div class="stat">
+        <span id="days-per-module">0</span>
+        <small>days per module</small>
+      </div>
+      <div class="stat">
+          <span id="modules-per-day">0</span>
+          <small>modules per day</small>
+      </div>
+    </div>
+  </section>
+  <button id="btn">Essayez-moi !</button>
+  <canvas id="confetti-canvas"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script src="test.js"></script>
+</body>
+
+</html>

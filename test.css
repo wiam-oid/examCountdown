@@ -1,0 +1,260 @@
+body {
+    background: #1D2125;
+    color: #f2f2f2;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background-color: #1D2125; /* Deep dark base */
+  color: #ffffff;
+  overflow: hidden; /* Prevents glow from causing scrollbars */
+}
+
+/* The Soft Radial Spotlight */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 900px;
+
+  /* Smooth falloff from center to transparent */
+  background: radial-gradient(
+    circle closest-side,
+    rgba(55, 66, 46, 1) 0%,      /* center: was rgb(74, 89, 62) */
+  rgba(38, 47, 35, 0.6) 40%,   /* middle: was rgba(42, 51, 39, 0.6) */
+  rgba(55, 66, 46, 0) 100%      /* Fade out completely before edges */
+  );
+
+  pointer-events: none; /* Lets users click/select elements underneath */
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+}
+.timezones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.2rem 2rem;
+  font-size: 1rem;
+  z-index: 1;
+}
+
+.tz-label {
+  flex-shrink: 0;          /* never gets squeezed */
+  white-space: nowrap;     /* stays on one line */
+}
+
+.tz-scroll {
+  flex: 1;                 /* takes all the remaining width */
+  overflow: hidden;        /* hides the part that is off-screen */
+}
+
+.ticker {
+  display: flex;
+  gap: 5rem;
+  width: max-content;
+  white-space: nowrap;
+  animation: scroll 25s linear infinite;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+#message-area {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: normal;
+  text-align: center;
+}
+
+.timer {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  padding: clamp(1rem, 3vw, 2.2rem) clamp(1rem, 4vw, 3.5rem);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+}
+
+.unit { text-align: center; min-width: clamp(3rem, 9vw, 7rem); }
+
+.unit span {
+  display: block;
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums; /* digits keep the same width, so nothing wiggles */
+}
+
+.unit small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: clamp(0.65rem, 1.6vw, 1rem);
+  color: #8a8f94;
+}
+
+.sep {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1;
+  color: #8a8f94;
+}
+
+.ticker {
+  display: flex;
+  gap: 5rem;              /* space between the time zones */
+  width: max-content;     /* the row is as wide as its content */
+  animation: scroll 25s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(100vw); }   /* starts just off the right edge */
+  to   { transform: translateX(-100%); }   /* ends fully off the left edge */
+}
+
+.timezones:hover .ticker { animation-play-state: paused; }
+
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -100px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.12;
+  mix-blend-mode: screen;
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  will-change: transform;
+  animation: film-grain 0.4s steps(1) infinite;
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+
+/* Blinking typewriter cursor */
+.cursor {
+  display: inline-block;
+  margin-left: 4px;
+  color: #8fa876;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Section 2: Planner / Counter */
+.planner {
+  position: relative;
+  z-index: 10;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 4rem 2rem;
+}
+
+.planner h2 {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: normal;
+  letter-spacing: 0.05em;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 820px;
+}
+
+.stat {
+  padding: 1.8rem 1.2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
+.stat span {
+  display: block;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat small {
+  display: block;
+  margin-top: 0.4rem;
+  color: #8a8f94;
+}
+.module-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.module-controls button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f2f2f2;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.module-controls button:hover {
+  background: rgba(143, 168, 118, 0.35);
+}
+
+.module-controls button:active {
+  transform: scale(0.92);
+}
+
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+
+
